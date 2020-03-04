@@ -12,10 +12,10 @@ namespace ConsoleApp1
         public static void Main(string[] args)
         {
             var binding = new BasicHttpBinding();
-            var endpoint = new EndpointAddress(new Uri(string.Format("http://{0}:5050/Service.asmx", Environment.MachineName)));
+            var endpoint = new EndpointAddress(new Uri(string.Format($"http://{Environment.MachineName}:5050/Service.asmx")));
             var serviceClient = new SampleService.SampleServiceClient(binding, endpoint);
             var result = serviceClient.Ping("hey");
-            Console.WriteLine("Ping method result: {0}", result);
+            Console.WriteLine($"Ping method result: {result}");
 
 			// TODO: DateTimeOffsetProperty not working
 			//var complexModel = new SampleService.ComplexModelInput
@@ -31,10 +31,10 @@ namespace ConsoleApp1
 			//	complexResult.FloatProperty, complexResult.StringProperty, string.Join(", ", complexResult.ListProperty), complexResult.DateTimeOffsetProperty);
 
 			var stringValue = serviceClient.VoidMethod();
-			Console.WriteLine("Void method result: {0}", stringValue);
+			Console.WriteLine($"Void method result: {stringValue}");
 
             var asyncMethodResult = serviceClient.AsyncMethodAsync().Result;
-            Console.WriteLine("Async method result: {0}", asyncMethodResult);
+            Console.WriteLine($"Async method result: {asyncMethodResult}");
 
             Console.ReadKey();
         }
